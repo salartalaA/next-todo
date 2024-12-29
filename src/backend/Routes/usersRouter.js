@@ -60,7 +60,8 @@ usersRouter.post("/login", async (req, res) => {
       "1931ede33d43ee32f5741be45bfce3dc3f80a39a77f5283863ae48b650212b87",
       { expiresIn: "1h" }
     );
-    res.json({ token });
+    const userID = user.id
+    res.json({ token, userID});
   } catch (error) {
     console.error("Error in login:", error);
     res.status(500).json({ message: "Server Error" });

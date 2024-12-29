@@ -71,6 +71,11 @@ async function login(state, formData) {
       value: data.token,
       httpOnly: true,
     });
+    cookieStore.set({
+      name: "userID",
+      value: data.userID,
+      httpOnly: true,
+    });
     return {
       success: "Login successful",
       user: data.user,
@@ -136,6 +141,7 @@ async function logout() {
   if (res.ok) {
     const cookieStore = await cookies();
     cookieStore.delete("token");
+    cookieStore.delete('userID')
     return {
       success: "Logged out successfully",
     };

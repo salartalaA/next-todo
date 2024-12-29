@@ -1,9 +1,9 @@
 import "@/app/globals.css";
 import TodoData from "@/app/components/todoData.component";
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const data = await fetch("http://localhost:3004/api/todos");
-  const todoData = await data.json();
-
-  return <TodoData todoData={todoData} />;
+  const cookieStore = await cookies();
+  const userID = cookieStore.get("userID");
+  return <TodoData userID={userID} />;
 }

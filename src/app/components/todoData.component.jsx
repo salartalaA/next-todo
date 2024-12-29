@@ -13,7 +13,7 @@ import { logout } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export default function TodoData() {
+export default function TodoData({userID}) {
   const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
   const { user, logoutContext } = useContext(AuthContext);
@@ -21,7 +21,9 @@ export default function TodoData() {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch("http://localhost:3004/api/todos");
+      const response = await fetch(
+        `http://localhost:3004/api/todos/${userID.value}`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch todos.");
       }
@@ -49,10 +51,11 @@ export default function TodoData() {
 
     const newTodo = {
       text: todoText.trim(),
+      userID: userID.value,
     };
 
     try {
-      const response = await fetch("http://localhost:3004/api/todos", {
+      const response = await fetch(`http://localhost:3004/api/todos/${userID.value}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

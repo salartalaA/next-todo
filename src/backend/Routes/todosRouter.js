@@ -3,9 +3,13 @@ const todo_db = require("../todoDB/todo_db");
 
 const todosRouter = express.Router();
 
-todosRouter.get("/", async (req, res) => {
+todosRouter.get("/:userID", async (req, res) => {
+  const userID = req.params.userID;
   try {
-    const [rows] = await todo_db.query("SELECT * FROM todos");
+    const [rows] = await todo_db.query(
+      "SELECT * FROM todos WHERE userID = ?",
+      userID
+    );
     res.send(rows);
   } catch (err) {
     console.error(err);
@@ -13,14 +17,15 @@ todosRouter.get("/", async (req, res) => {
   }
 });
 
-todosRouter.post("/", async (req, res) => {
+todosRouter.post("/:userID", async (req, res) => {
+  const userID = req.params.userID;
   const { text } = req.body;
   if (typeof text !== "string") {
     return res.status(400).send({ error: "Invalid Input data" });
   }
   try {
-    const query = "INSERT INTO todos (text) VALUES (?)";
-    const [result] = await todo_db.query(query, [text]);
+    const query = "INSERT INTO todos (text, userID) VALUES (?, ?)";
+    const [result] = await todo_db.query(query, [text, userID]);
 
     res
       .status(201)
