@@ -4,13 +4,20 @@ import "@/app/globals.css";
 import Logo from "@/app/assets/Logo.png";
 import plugIcon from "@/app/assets/Layer 2.png";
 import cliIcon from "@/app/assets/Clipboard.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import TodoItem from "@/app/components/todoItem.component";
 import Image from "next/image";
+import AuthContext from "../context/AuthContext";
+import Link from "next/link";
+import { logout } from "@/actions/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function TodoData() {
   const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
+  const { user, logoutContext } = useContext(AuthContext);
+  const router = useRouter();
 
   const fetchTodos = async () => {
     try {
@@ -22,7 +29,7 @@ export default function TodoData() {
       setTodos(data);
     } catch (error) {
       console.error(error);
-      alert("An error occurred while fetching todos.");
+      toast.error("An error occurred while fetching todos.");
     }
   };
 
@@ -36,7 +43,7 @@ export default function TodoData() {
 
   const handleSubmitButton = async () => {
     if (!todoText.trim()) {
-      alert("Please enter a valid todo.");
+      toast.error("Please enter a valid todo.");
       return;
     }
 
@@ -61,7 +68,7 @@ export default function TodoData() {
       setTodoText("");
     } catch (error) {
       console.error(error);
-      alert("An error occurred while adding the todo.");
+      toast.error("An error occurred while adding the todo.");
     }
   };
 
@@ -78,7 +85,7 @@ export default function TodoData() {
       fetchTodos();
     } catch (error) {
       console.error(error);
-      alert("An error occurred while deleting the todo.");
+      toast.error("An error occurred while deleting the todo.");
     }
   };
 
@@ -95,7 +102,7 @@ export default function TodoData() {
       fetchTodos();
     } catch (error) {
       console.error(error);
-      alert("An error occurred while updating the todo.");
+      toast.error("An error occurred while updating the todo.");
     }
   };
 
@@ -105,6 +112,35 @@ export default function TodoData() {
     <div className="bg-primary min-h-screen pb-6">
       <div className="bg-secondary h-[200px] flex justify-center items-center">
         <Image src={Logo} alt="logo" />
+        <div className="text-xs font-bold">
+          {user ? (
+            <>
+              <span className="font-mono text-white ml-4 bg-indigo-600 p-1 rounded-lg shadow-md">
+                {user.name}
+              </span>
+              <button
+                onClick={async () => {
+                  await logout();
+                  logoutContext();
+                  router.push("/");
+                }}
+                className="mx-2 bg-pink-900 p-1 text-white rounded-lg shadow-md font-semibold"
+              >
+                logout
+              </button>
+            </>
+          ) : (
+            <>
+              <span>
+                <Link href="/auth/login">login</Link>
+              </span>
+              <span className="mx-2">/</span>
+              <span>
+                <Link href="/auth/register">signup</Link>
+              </span>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="flex w-full justify-center items-center relative">

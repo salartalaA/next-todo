@@ -1,4 +1,6 @@
 import "@/app/globals.css";
+import { AuthProvider } from "./context/AuthContext";
+import Toastify from "./components/Toastify";
 
 export default function RootLayout({ children }) {
   return (
@@ -6,7 +8,12 @@ export default function RootLayout({ children }) {
       <head>
         <title>Todo List</title>
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+          <Toastify />
+        </AuthProvider>
+      </body>
     </html>
   );
 }

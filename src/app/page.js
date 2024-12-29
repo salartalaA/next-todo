@@ -1,5 +1,5 @@
-import "./globals.css";
-import TodoData from "./components/todoData.component";
+import "@/app/globals.css";
+import TodoData from "@/app/components/todoData.component";
 
 export default async function Page() {
   const data = await fetch("http://localhost:3004/api/todos");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2024 at 12:50 AM
+-- Generation Time: Dec 29, 2024 at 04:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `todos` (
   `id` int(100) NOT NULL,
-  `text` text NOT NULL,
-  `isCompleted` tinyint(1) NOT NULL DEFAULT 0
+  `text` varchar(100) NOT NULL,
+  `isCompleted` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
@@ -38,9 +38,29 @@ CREATE TABLE `todos` (
 --
 
 INSERT INTO `todos` (`id`, `text`, `isCompleted`) VALUES
-(41, 'Coffe', 1),
-(43, 'Code', 0),
-(45, 'Gym', 1);
+(24, 'Gym', 1),
+(38, 'Coffe', 0),
+(100, 'Code', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(8, 'test', 'test@gmail.com', '$2b$10$xhyOzSAOr3hqjwALwppRx.h472Ag62uRadG.ztpYr6KI7mP8ligqu');
 
 --
 -- Indexes for dumped tables
@@ -53,6 +73,13 @@ ALTER TABLE `todos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -60,7 +87,13 @@ ALTER TABLE `todos`
 -- AUTO_INCREMENT for table `todos`
 --
 ALTER TABLE `todos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
