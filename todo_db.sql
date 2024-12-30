@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2024 at 11:20 PM
+-- Generation Time: Dec 30, 2024 at 05:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,9 +39,9 @@ CREATE TABLE `todos` (
 --
 
 INSERT INTO `todos` (`id`, `text`, `isCompleted`, `userID`) VALUES
-(110, 'Gym', 1, 11),
-(111, 'Coffe', 0, 11),
-(112, 'Code', 1, 11);
+(418, 'Gym', 1, 11),
+(419, 'Coffe', 0, 11),
+(420, 'Code', 1, 11);
 
 -- --------------------------------------------------------
 
@@ -89,13 +89,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `todos`
 --
 ALTER TABLE `todos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=474;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

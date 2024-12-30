@@ -120,7 +120,6 @@ async function me() {
 async function logout() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token");
-
   if (!token) {
     return {
       error: "No token found, already logged out.",
@@ -141,7 +140,7 @@ async function logout() {
   if (res.ok) {
     const cookieStore = await cookies();
     cookieStore.delete("token");
-    cookieStore.delete('userID')
+    cookieStore.delete("userID");
     return {
       success: "Logged out successfully",
     };
