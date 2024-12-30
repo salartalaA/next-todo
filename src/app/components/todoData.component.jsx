@@ -202,9 +202,7 @@ export default function TodoData({ userID }) {
                 value={searchTerm}
               />
             </div>
-          ) : (
-            <></>
-          )}
+          ) : null}
 
           {filteredTodos.length ? (
             filteredTodos.map((todo, index) => (
