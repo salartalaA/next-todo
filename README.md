@@ -1,6 +1,6 @@
 <h1 align="center">An Improved version of react-todo :]</h1>
 
-It's a simple todo-list with login system that you can create a user and add a todo or remove it
+It's a simple todo-list with login system that you can create a user and create specific tasks for that user :]
 
 ### How to run the project
 
